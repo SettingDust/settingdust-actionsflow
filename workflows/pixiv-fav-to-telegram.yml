@@ -1,0 +1,20 @@
+on:
+  rss:
+    url: https://rsshub.app/pixiv/user/bookmarks/20119250
+    config:
+      limit: 1
+jobs:
+  telegram:
+    name: 发送 Telegram 消息
+    runs-on: ubuntu-latest
+    steps:
+      - name: 提取图片链接
+        uses: SettingDust/action-regex-match@main
+        id: pics-links
+        with:
+          text: ${{ on.rss.outputs.content }}
+          regex: 'src="(.*?)"'
+          flags: 'gm'
+      
+      - name: 测试
+        run: echo ${{ steps.pics-links.outputs.matches }}
