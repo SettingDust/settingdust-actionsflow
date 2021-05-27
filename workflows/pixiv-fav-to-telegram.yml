@@ -16,5 +16,12 @@ jobs:
           regex: 'src="(.*?)"'
           flags: 'gm'
       
+      - name: 下载图片
+        uses: SettingDust/download-file-action@master
+        id: download-pics
+        with:
+          file-url: ${{ steps.pics-links.outputs.matches }}
+          location: 'pics'
+
       - name: 测试
-        run: echo ${{ steps.pics-links.outputs.matches }}
+        run: 'echo ${{ steps.download-pics.outputs.file-path }}'
