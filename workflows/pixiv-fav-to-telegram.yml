@@ -1,8 +1,6 @@
 on:
   rss:
     url: https://rsshub.app/pixiv/user/bookmarks/20119250
-    config:
-      limit: 1
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -16,12 +14,13 @@ jobs:
           regex: 'src="(.*?)"'
           flags: 'gm'
       
-      - name: 下载图片
-        uses: SettingDust/download-file-action@master
-        id: download-pics
+      - name: 发送图片
+        uses: SettingDust/telegram-action@main
         with:
-          file-url: ${{ steps.pics-links.outputs.matches }}
-          location: 'pics'
-
-      - name: 测试
-        run: 'echo ${{ steps.download-pics.outputs.file-path }}'
+          chatId: ${{ secrets.TELEGRAM_TO }}
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          content: |
+            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }}) ${{ on.rss.outputs.author }}
+            #图片 #ACG
+          photoUrls: ${{ steps.pics-links.outputs.matches }}
+          disableWebPagePreview: true
