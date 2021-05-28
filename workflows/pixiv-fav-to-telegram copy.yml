@@ -1,16 +1,26 @@
 on:
   rss:
     url: https://rsshub.app/pixiv/user/bookmarks/20119250
+    config:
+      limit: 1
 jobs:
   telegram:
     name: 发送 Telegram 消息
     runs-on: ubuntu-latest
     steps:
       - name: 下载图片
-        uses: SettingDust/downloaad-file-action@master
+        uses: SettingDust/download-file-action@master
         id: pics-download
         with:
           file-url: https://pixiv.cat/89993467.jpg
+
+      - name: 压缩图片
+        uses: SettingDust/image-compress-action@main
+        id: pics-compress
+        with:
+          files: ${{ steps.pics-download.outputs.files }}
+          min-size: 5000000
+
       - name: 发送图片
         uses: SettingDust/telegram-action@main
         with:
@@ -19,5 +29,5 @@ jobs:
           content: |
             [jio子](https://www.pixiv.net/artworks/89993467) 蓝猫Akko
             #图片 #ACG
-          photos: ${{ steps.pics-download.outputs.file-path }}
+          photos: ${{ steps.pics-compress.outputs.images }}
           disableWebPagePreview: true
