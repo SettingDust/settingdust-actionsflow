@@ -1,0 +1,20 @@
+jobs:
+  telegram:
+    name: 发送 Telegram 消息
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下载图片
+        uses: SettingDust/downloaad-file-action@master
+        id: pics-download
+        with:
+          file-url: https://pixiv.cat/89993467.jpg
+      - name: 发送图片
+        uses: SettingDust/telegram-action@main
+        with:
+          chatId: ${{ secrets.TELEGRAM_TO }}
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          content: |
+            [jio子](https://www.pixiv.net/artworks/89993467) 蓝猫Akko
+            #图片 #ACG
+          photos: ${{ steps.pics-download.outputs.file-path }}
+          disableWebPagePreview: true

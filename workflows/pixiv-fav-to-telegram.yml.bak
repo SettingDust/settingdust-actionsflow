@@ -14,6 +14,12 @@ jobs:
           regex: 'src="(.*?)"'
           flags: 'gm'
       
+      - name: 下载图片
+        uses: SettingDust/downloaad-file-action@master
+        id: pics-download
+        with:
+          file-url: ${{ steps.pics-links.outputs.matches }}
+      
       - name: 发送图片
         uses: SettingDust/telegram-action@main
         with:
@@ -22,5 +28,5 @@ jobs:
           content: |
             [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }}) ${{ on.rss.outputs.author }}
             #图片 #ACG
-          photoUrls: ${{ steps.pics-links.outputs.matches }}
+          photos: ${{ steps.pics-download.outputs.file-path }}
           disableWebPagePreview: true
