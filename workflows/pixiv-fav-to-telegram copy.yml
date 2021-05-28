@@ -1,3 +1,6 @@
+on:
+  rss:
+    url: https://rsshub.app/pixiv/user/bookmarks/20119250
 jobs:
   telegram:
     name: 发送 Telegram 消息
