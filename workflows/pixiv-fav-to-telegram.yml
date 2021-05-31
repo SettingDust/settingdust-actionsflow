@@ -1,6 +1,8 @@
 on:
-  rss:
-    url: https://rsshub.app/pixiv/user/bookmarks/20119250
+  rsshub:
+    path: /pixiv/user/bookmarks/20119250
+    rsshubConfig:
+      PIXIV_REFRESHTOKEN: ${{ secrets.PIXIV_REFRESH_TOKEN }}
 jobs:
   telegram:
     name: 发送 Telegram 消息
