@@ -1,0 +1,42 @@
+on:
+  rsshub:
+    path:
+      - /bilibili/fav/502884/56543584/disableEmbed
+      - /bilibili/user/coin/502884/disableEmbed
+jobs:
+  telegram:
+    name: 发送 Telegram 消息
+    runs-on: ubuntu-latest
+    steps:
+      - name: 提取图片链接
+        uses: SettingDust/action-regex-match@main
+        id: links
+        with:
+          text: ${{ on.rss.outputs.content }}
+          regex: 'src="(.*?)"'
+          flags: "gm"
+
+      - name: 下载图片
+        uses: SettingDust/download-file-action@master
+        id: download
+        with:
+          file-url: ${{ steps.links.outputs.matches }}
+
+      - name: 压缩图片
+        uses: SettingDust/image-compress-action@main
+        id: compress
+        with:
+          files: ${{ steps.download.outputs.files }}
+          min-size: 10485760
+          max-dimension: 5000
+
+      - name: 发送图片
+        uses: SettingDust/telegram-action@main
+        with:
+          chatId: ${{ secrets.TELEGRAM_TO }}
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          content: |
+            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }}) ${{ on.rss.outputs.author }}
+            #视频 #bilibili
+          photos: ${{ steps.compress.outputs.images }}
+          disableWebPagePreview: true
