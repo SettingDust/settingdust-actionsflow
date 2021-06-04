@@ -4,7 +4,7 @@ on:
       - /bilibili/fav/502884/56543584/disableEmbed
       - /bilibili/user/coin/502884/disableEmbed
     config:
-      skip: 4
+      skip: 7
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -38,7 +38,8 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }}) ${{ on.rsshub.outputs.author }}
+            [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }})
+            ${{ on.rsshub.outputs.author }}
             #视频 #bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
