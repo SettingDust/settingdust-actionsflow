@@ -1,9 +1,8 @@
 on:
   rsshub:
-    path:
-      - /bilibili/fav/502884/56543584/disableEmbed
+    path: /bilibili/fav/${{ secrets.BILIBILI_ID }}/${{ secrets.BILIBILI_FAV_ID }}/disableEmbed
     config:
-      skip: 0
+      skip: 12
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -44,7 +43,7 @@ jobs:
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
             [${{ steps.escape-author.outputs.1 }}](${{ on.rsshub.outputs.link }})
-            作者：#${{ steps.escape-author.outputs.0 }}
-            #视频 #bilibili
+            作者：\#${{ steps.escape-author.outputs.0 }}
+            \#视频 \#bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true

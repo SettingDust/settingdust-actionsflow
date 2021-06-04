@@ -1,6 +1,6 @@
 on:
   rss:
-    url: https://rsshub.app/pixiv/user/bookmarks/20119250
+    url: https://rsshub.app/pixiv/user/bookmarks/${{ secrets.PIXIV_ID }}
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -41,7 +41,7 @@ jobs:
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
             [${{ steps.escape-author.outputs.1 }}](${{ on.rsshub.outputs.link }})
-            作者：#${{ steps.escape-author.outputs.0 }}
-            #图片 #ACG
+            作者：\#${{ steps.escape-author.outputs.0 }}
+            \#图片 \#ACG
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
