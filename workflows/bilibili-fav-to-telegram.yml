@@ -39,7 +39,7 @@ jobs:
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
             [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }})
-            ${{ on.rsshub.outputs.author }}
+            作者：#${{ on.rsshub.outputs.author }}
             #视频 #bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true

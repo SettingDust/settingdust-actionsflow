@@ -34,7 +34,8 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }}) ${{ on.rss.outputs.author }}
+            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }})
+            作者：#${{ on.rss.outputs.author }}
             #图片 #ACG
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
