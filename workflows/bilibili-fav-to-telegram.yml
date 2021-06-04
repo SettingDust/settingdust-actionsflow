@@ -22,7 +22,7 @@ jobs:
         uses: SettingDust/markdown-escape-action@main
         id: escape-author
         with:
-          text: ${{ on.rsshub.outputs.author }}
+          text: ${{ on.rsshub.outputs.author }}⭐${{ on.rsshub.outputs.title }}
 
       - name: 下载图片
         uses: SettingDust/download-file-action@master
@@ -44,8 +44,8 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }})
-            作者：#${{ steps.escape-author.outputs.text }}
+            [${{ steps.escape-author.outputs.1 }}](${{ on.rsshub.outputs.link }})
+            作者：#${{ steps.escape-author.outputs.0 }}
             #视频 #bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true

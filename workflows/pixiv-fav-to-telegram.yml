@@ -18,7 +18,7 @@ jobs:
         uses: SettingDust/markdown-escape-action@main
         id: escape-author
         with:
-          text: ${{ on.rss.outputs.author }}
+          text: ${{ on.rss.outputs.author }}⭐${{ on.rss.outputs.title }}
 
       - name: 下载图片
         uses: SettingDust/download-file-action@master
@@ -40,8 +40,8 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }})
-            作者：#${{ steps.escape-author.outputs.text }}
+            [${{ steps.escape-author.outputs.1 }}](${{ on.rsshub.outputs.link }})
+            作者：#${{ steps.escape-author.outputs.0 }}
             #图片 #ACG
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
