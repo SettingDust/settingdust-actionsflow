@@ -4,7 +4,7 @@ on:
       - /bilibili/fav/502884/56543584/disableEmbed
       - /bilibili/user/coin/502884/disableEmbed
     config:
-      skip: 7
+      skip: 0
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -17,6 +17,12 @@ jobs:
           text: ${{ on.rsshub.outputs.description }}
           regex: 'src="(.*?)"'
           flags: "gm"
+
+      - name: 转义作者名
+        uses: SettingDust/markdown-escape-action@main
+        id: escape-author
+        with:
+          text: ${{ on.rsshub.outputs.author }}
 
       - name: 下载图片
         uses: SettingDust/download-file-action@master
@@ -39,7 +45,7 @@ jobs:
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
             [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }})
-            作者：#${{ on.rsshub.outputs.author }}
+            作者：#${{ steps.escape-author.outputs.text }}
             #视频 #bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
