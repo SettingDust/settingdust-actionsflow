@@ -2,7 +2,6 @@ on:
   rsshub:
     path:
       - /bilibili/fav/502884/56543584/disableEmbed
-      - /bilibili/user/coin/502884/disableEmbed
     config:
       skip: 0
 jobs:
