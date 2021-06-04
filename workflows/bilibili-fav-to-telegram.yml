@@ -3,6 +3,8 @@ on:
     path:
       - /bilibili/fav/502884/56543584/disableEmbed
       - /bilibili/user/coin/502884/disableEmbed
+    config:
+      skip: 4
 jobs:
   telegram:
     name: 发送 Telegram 消息
@@ -12,7 +14,7 @@ jobs:
         uses: SettingDust/action-regex-match@main
         id: links
         with:
-          text: ${{ on.rsshub.outputs.content }}
+          text: ${{ on.rsshub.outputs.description }}
           regex: 'src="(.*?)"'
           flags: "gm"
 
