@@ -12,7 +12,7 @@ jobs:
         uses: SettingDust/action-regex-match@main
         id: links
         with:
-          text: ${{ on.rss.outputs.content }}
+          text: ${{ on.rsshub.outputs.content }}
           regex: 'src="(.*?)"'
           flags: "gm"
 
@@ -36,7 +36,7 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ on.rss.outputs.title }}](${{ on.rss.outputs.link }}) ${{ on.rss.outputs.author }}
+            [${{ on.rsshub.outputs.title }}](${{ on.rsshub.outputs.link }}) ${{ on.rsshub.outputs.author }}
             #视频 #bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
