@@ -1,8 +1,6 @@
 on:
   rsshub:
     path: /bilibili/fav/${{ secrets.BILIBILI_ID }}/${{ secrets.BILIBILI_FAV_ID }}/disableEmbed
-    config:
-      skip: 12
 jobs:
   telegram:
     name: 发送 Telegram 消息
