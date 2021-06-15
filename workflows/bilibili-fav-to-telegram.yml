@@ -34,7 +34,7 @@ jobs:
           min-size: 10485760
           max-dimension: 5000
 
-      - name: 发送图片
+      - name: 发送视频信息
         uses: SettingDust/telegram-action@main
         with:
           chatId: ${{ secrets.TELEGRAM_TO }}
