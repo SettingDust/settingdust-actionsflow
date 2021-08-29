@@ -1,6 +1,6 @@
 on:
-  rss:
-    url: https://rss.shab.fun/pixiv/user/bookmarks/${{ secrets.PIXIV_ID }}
+  rsshub:
+    path: /pixiv/user/bookmarks/${{ secrets.PIXIV_ID }}
 jobs:
   telegram:
     name: 发送 Telegram 消息
