@@ -15,7 +15,7 @@ jobs:
           flags: "gm"
 
       - name: 转义作者名
-        uses: SettingDust/markdown-escape-action@main
+        uses: SettingDust/telegram-markdown-escape-action@main
         id: escape-author
         with:
           text: ${{ on.rsshub.outputs.author }}⭐${{ on.rsshub.outputs.title }}
@@ -40,8 +40,8 @@ jobs:
           chatId: ${{ secrets.TELEGRAM_TO }}
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
           content: |
-            [${{ steps.escape-author.outputs.1 }}](${{ on.rsshub.outputs.link }})
-            作者：\#${{ steps.escape-author.outputs.0 }}
+            [${{ steps.escape-author.outputs.group1 }}](${{ on.rsshub.outputs.link }})
+            作者：\#${{ steps.escape-author.outputs.group0 }}
             \#视频 \#bilibili
           photos: ${{ steps.compress.outputs.images }}
           disableWebPagePreview: true
