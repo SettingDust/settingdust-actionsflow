@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Actionsflow
-        uses: actionsflow/actionsflow-action
+        uses: actionsflow/actionsflow-action@v1
         with:
           args: "build --include ${{ github.event.inputs.include || ''}} -f ${{github.event.inputs.force=='true' && 'true' || 'false'}} --verbose ${{github.event.inputs.verbose=='true' && 'true' || 'false'}}"
           json-secrets: ${{ toJSON(secrets) }}
