@@ -17,13 +17,15 @@ jobs:
           flags: "gm"
 
       - name: 转义作者名
-        uses: SettingDust/markdown-escape-action@main
+        uses: SettingDust/telegram-markdown-escape-action@main
         id: escape-author
         with:
-          text: ${{ on.rsshub.outputs.author }}⭐${{ on.rsshub.outputs.title }}
+          text: |
+            ${{ on.rsshub.outputs.author }}
+            ${{ on.rsshub.outputs.title }}
 
       - name: 下载图片
-        uses: SettingDust/download-file-action@master
+        uses: SettingDust/download-files-action@master
         id: download
         with:
           file-url: ${{ steps.links.outputs.matches }}

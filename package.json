@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "Owen Young <theowenyoung@gmail.com>",
   "devDependencies": {
-    "actionsflow": "^1.11.2"
+    "actionsflow": "^1.12.1"
   },
   "keywords": [
     "actionsflow",
@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@actionsflow/trigger-rsshub": "github:SettingDust/actionsflow-trigger-rsshub#main",
-    "mime-types": "^2.1.30"
+    "mime-types": "^2.1.35"
   }
 }
