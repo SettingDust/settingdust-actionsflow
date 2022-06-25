@@ -18,7 +18,9 @@ jobs:
         uses: SettingDust/telegram-markdown-escape-action@main
         id: escape-author
         with:
-          text: ${{ on.rsshub.outputs.author }}⭐${{ on.rsshub.outputs.title }}
+          text: |
+            ${{ on.rsshub.outputs.author }}
+            ${{ on.rsshub.outputs.title }}
 
       - name: 下载图片
         uses: SettingDust/download-file-action@master
