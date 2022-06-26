@@ -45,5 +45,6 @@ jobs:
             [${{ steps.escape-author.outputs.group1 }}](${{ on.rsshub.outputs.link }})
             作者：\#${{ steps.escape-author.outputs.group0 }}
             \#视频 \#bilibili
-          photos: ${{ steps.compress.outputs.images }}
+          medias: ${{ steps.compress.outputs.images }}
+          type: photo
           disableWebPagePreview: true
