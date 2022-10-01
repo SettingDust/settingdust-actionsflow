@@ -49,7 +49,7 @@ jobs:
           type: photo
           disableWebPagePreview: true
 
-      - uses: SettingDust/setup-python@main
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
@@ -57,7 +57,7 @@ jobs:
         run: pip3 install you-get
 
       - name: 下载视频
-        run: you-get -o video '${{ on.rsshub.outputs.link }}'
+        run: you-get -o video --debug '${{ on.rsshub.outputs.link }}'
 
       - name: 筛选视频文件
         uses: tj-actions/glob@v13
