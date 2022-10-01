@@ -48,3 +48,33 @@ jobs:
           medias: ${{ steps.compress.outputs.images }}
           type: photo
           disableWebPagePreview: true
+
+      - name: 安装 you-get
+        run:
+          - pip3 install you-get
+          -
+      - name: 下载视频
+        run:
+          - you-get -o video '${{ on.rsshub.outputs.link }}'
+
+      - name: 筛选视频文件
+        uses: tj-actions/glob@v13
+        id: glob
+        with:
+          files: |
+            video/*.*
+            !video/*.xml
+          match-directories: false
+          separator: '\n'
+
+      - name: 归档视频
+        uses: SettingDust/telegram-action@main
+        with:
+          chatId: ${{ secrets.TELEGRAM_ARCHIVE_TO }}
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          content: |
+            [${{ steps.escape-author.outputs.group1 }}](${{ on.rsshub.outputs.link }})
+            作者：\#${{ steps.escape-author.outputs.group0 }}
+            \#视频 \#bilibili
+          medias: ${{ steps.glob.outputs.paths }}
+          disableWebPagePreview: true
