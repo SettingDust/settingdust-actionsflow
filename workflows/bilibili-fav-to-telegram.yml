@@ -49,42 +49,42 @@ jobs:
           type: photo
           disableWebPagePreview: true
 
-      - uses: FedericoCarboni/setup-ffmpeg@v1
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '^1.13.1'
-
-      - name: 安装 lux
-        run: go install github.com/iawia002/lux@latest
-
-      - uses: DamianReeves/write-file-action@master
-        with:
-          path: bilibili
-          contents: ${{ secrets.BILIBILI_COOKIE }}
-
-      - name: 下载视频
-        run: lux -o video -d -c bilibili '${{ on.rsshub.outputs.link }}'
-
-      - name: 筛选视频文件
-        uses: tj-actions/glob@v13
-        id: glob
-        with:
-          files: |
-            video/*.*
-            !video/*.xml
-          match-directories: false
-          separator: \n
-
-      - name: 归档视频
-        uses: SettingDust/telegram-action@main
-        with:
-          chatId: ${{ secrets.TELEGRAM_ARCHIVE_TO }}
-          botToken: ${{ secrets.TELEGRAM_TOKEN }}
-          content: |
-            [${{ steps.escape-author.outputs.group1 }}](${{ on.rsshub.outputs.link }})
-            作者：\#${{ steps.escape-author.outputs.group0 }}
-            \#视频 \#bilibili
-          medias: |
-            ${{ steps.download.outputs.files }}
-            ${{ steps.glob.outputs.paths }}
-          disableWebPagePreview: true
+#      - uses: FedericoCarboni/setup-ffmpeg@v1
+#      - uses: actions/setup-go@v3
+#        with:
+#          go-version: '^1.13.1'
+#
+#      - name: 安装 lux
+#        run: go install github.com/iawia002/lux@latest
+#
+#      - uses: DamianReeves/write-file-action@master
+#        with:
+#          path: bilibili
+#          contents: ${{ secrets.BILIBILI_COOKIE }}
+#
+#      - name: 下载视频
+#        run: lux -o video -d -c bilibili '${{ on.rsshub.outputs.link }}'
+#
+#      - name: 筛选视频文件
+#        uses: tj-actions/glob@v13
+#        id: glob
+#        with:
+#          files: |
+#            video/*.*
+#            !video/*.xml
+#          match-directories: false
+#          separator: \n
+#
+#      - name: 归档视频
+#        uses: SettingDust/telegram-action@main
+#        with:
+#          chatId: ${{ secrets.TELEGRAM_ARCHIVE_TO }}
+#          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+#          content: |
+#            [${{ steps.escape-author.outputs.group1 }}](${{ on.rsshub.outputs.link }})
+#            作者：\#${{ steps.escape-author.outputs.group0 }}
+#            \#视频 \#bilibili
+#          medias: |
+#            ${{ steps.download.outputs.files }}
+#            ${{ steps.glob.outputs.paths }}
+#          disableWebPagePreview: true
