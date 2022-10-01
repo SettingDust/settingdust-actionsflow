@@ -58,7 +58,7 @@ jobs:
         run: go install github.com/iawia002/lux@latest
 
       - name: 下载视频
-        run: lux -o video -d -c '$BILIBILI_COOKIE' '${{ on.rsshub.outputs.link }}'
+        run: lux -o video -d -c $BILIBILI_COOKIE '${{ on.rsshub.outputs.link }}'
         env:
           BILIBILI_COOKIE: ${{ secrets.BILIBILI_COOKIE }}
 
