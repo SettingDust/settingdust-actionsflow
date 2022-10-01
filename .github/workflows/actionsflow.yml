@@ -38,4 +38,4 @@ jobs:
         with:
           version: latest
       - name: Run act
-        run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env -P catthehacker/ubuntu:act-22.04
+        run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env -P ubuntu-latest=catthehacker/ubuntu:act-22.04
