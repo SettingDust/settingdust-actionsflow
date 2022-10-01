@@ -57,10 +57,13 @@ jobs:
       - name: 安装 lux
         run: go install github.com/iawia002/lux@latest
 
+      - uses: DamianReeves/write-file-action@master
+        with:
+          path: bilibili
+          contents: ${{ secrets.BILIBILI_COOKIE }}
+
       - name: 下载视频
-        run: lux -o video -d -c $BILIBILI_COOKIE '${{ on.rsshub.outputs.link }}'
-        env:
-          BILIBILI_COOKIE: ${{ secrets.BILIBILI_COOKIE }}
+        run: lux -o video -d -c bilibili '${{ on.rsshub.outputs.link }}'
 
       - name: 筛选视频文件
         uses: tj-actions/glob@v13
