@@ -50,12 +50,12 @@ jobs:
           disableWebPagePreview: true
 
       - name: 安装 you-get
-        run:
-          - pip3 install you-get
-          -
+        run: |
+          pip3 install you-get
+
       - name: 下载视频
-        run:
-          - you-get -o video '${{ on.rsshub.outputs.link }}'
+        run: |
+          you-get -o video '${{ on.rsshub.outputs.link }}'
 
       - name: 筛选视频文件
         uses: tj-actions/glob@v13
@@ -65,7 +65,7 @@ jobs:
             video/*.*
             !video/*.xml
           match-directories: false
-          separator: '\n'
+          separator: \n
 
       - name: 归档视频
         uses: SettingDust/telegram-action@main
