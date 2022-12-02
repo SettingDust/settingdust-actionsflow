@@ -28,7 +28,8 @@
     "url": "https://github.com/actionsflow/actionsflow-workflow-default/issues"
   },
   "dependencies": {
-    "@actionsflow/trigger-rsshub": "github:SettingDust/actionsflow-trigger-rsshub#main",
+    "@actionsflow/trigger-rsshub": "https://github.com/SettingDust/actionsflow-trigger-rsshub",
     "mime-types": "^2.1.35"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }

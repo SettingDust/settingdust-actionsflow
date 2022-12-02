@@ -16,7 +16,7 @@ jobs:
           git config user.email github-actions[bot]@users.noreply.github.com
       - name: Update
         run: |
-          npm ci
+          yarn
           npm update
       - name: Git Push
         run: |
